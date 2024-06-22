@@ -1,12 +1,5 @@
 const entry = require('../models/entries.model'); // Importar el modelo de la BBDD
 
-//getEntries
-// if(hay email)
-//     busca por mail
-// else
-//     busca todo
-
-
 // GET http://localhost:3000/entries --> ALL
 // GET http://localhost:3000/entries?email=hola@gmail.com --> por email
 const getEntries = async (req, res) => {
@@ -41,11 +34,11 @@ const getEntries = async (req, res) => {
 
 //createEntry
 // POST http://localhost:3000/api/entries
-let newEntry = {
-    "title":"noticia desde Node",
-    "content":"va a triunfar esto2",
-    "email":"alejandru@thebridgeschool.es",
-    "category":"sucesos"}
+// let newEntry = {
+//     "title":"noticia desde Node",
+//     "content":"va a triunfar esto2",
+//     "email":"alejandru@thebridgeschool.es",
+//     "category":"sucesos"}
 
 // Crear entry por email
 const createEntry = async (req, res) => {
@@ -97,19 +90,17 @@ const updateEntry = async (req, res) => {
 
 //DELETE
 const deleteEntry = async (req, res) => {
-    const title = req.params.title;
     try {
-        if (title) {
-            await entry.deleteEntry(title);
-        }
-        else {
-            res.status(401).json({ error: "unauthorized" });
-        }
-        res.status(201).json({ message: 'Entrada borrada' });
-    } catch (error) {
-        res.status(500).json({ error: "error en la BBDD" });
+        entries = await entry.deleteEntry(req.query.title);
+        res.status(200).json({"exito" : `Se ha borrado la entry: "${req.query.title}"`}); // [] con las entries encontradas
+    } catch {
+        res.status(500).json({ "error": "error en la BBDD" }); // [] con las entries encontradas
+
     }
-};
+    console.log(entries)
+}
+
+
 
 module.exports = {
     getEntries,

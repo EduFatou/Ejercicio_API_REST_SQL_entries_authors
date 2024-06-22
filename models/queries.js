@@ -23,18 +23,12 @@ const queries = {
     //Modificar la query SQL para que me devuelva una respuesta
     //con los datos del autor y sin ID de la entry:
     getAllEntries: `
-    SELECT
-        e.title,e.content,e.date,e.category,a.name,a.surname,a.image
-    FROM
-        entries AS e
-    INNER JOIN
-        authors AS a
+    SELECT e.title,e.content,e.date,e.category,a.name,a.surname,a.image
+    FROM entries AS e
+    INNER JOIN authors AS a
     ON e.id_author=a.id_author`,
-    deleteEntry:`
-    DELETE FROM
-        entries
-    WHERE
-        title = $1`
+    deleteEntry:`DELETE FROM entries
+    WHERE title = $1`
     // getEntriesByName:`
     // SELECT e.title,e.content,e.date,e.category,a.name,a.surname,a.image
     // FROM entries AS e

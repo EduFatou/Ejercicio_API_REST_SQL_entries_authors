@@ -1,7 +1,6 @@
 const express = require('express');
 // Rutas de productos
 const entriesController = require("../controllers/entries.controller");
-const { deleteEntry } = require('../models/queries');
 const router = express.Router();
 
 router.get('/', entriesController.getEntries);

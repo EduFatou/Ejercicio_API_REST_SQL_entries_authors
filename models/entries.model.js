@@ -1,13 +1,14 @@
-const { Pool } = require('pg');
-const queries = require('./queries') // Queries SQL
+const {Pool} = require('pg');
+const pool = require('../config/db_pgsql');
+const queries = require('../queries/entries.queries') // Queries SQL
 
-const pool = new Pool({
-    host: 'localhost',
-    user: 'postgres',
-    port: '5432',
-    database: 'postgres',
-    password: '123456'
-  });
+// const pool = new Pool({
+//     host: 'localhost',
+//     user: 'postgres',
+//     port: '5432',
+//     database: 'postgres',
+//     password: '123456'
+//   });
 
 // GET
 const getEntriesByEmail = async (email) => {
@@ -60,20 +61,19 @@ const createEntry = async (entry) => {
 }
 
 // DELETE
-const deleteEntry = async (entry) => {
-    const {title} = entry;
+const deleteEntry = async (title) => {
     let client, result;
     try {
         client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query(queries.deleteEntry,[entry]);
-        result = console.log(`Entrada borrrada con título ${entry}`)
+        const data = await client.query(queries.deleteEntry,[title]);
+        result = data.fields;
     } catch (err) {
         console.log(err);
         throw err;
     } finally {
         client.release();
     }
-    return result
+    return result;
 }
 
 //UPDATE
@@ -134,17 +134,17 @@ getAllEntries()
 // createEntry(newEntry)
 //     .then(data => console.log(data)) 
 
-// const updatedEntry = {
-//     title: "Se acabaron las tortillas del Markina",
-//     content: "Estaban demasiado muy buenas y se las han comido todas",
-//     date:"2024-06-17",
-//     email: "guillermu@thebridgeschool.es",
-//     category: "Sucesos",
-//     old_title:"Se acabaron las mandarinas de TB"
-// }
+const updatedEntry = {
+    title: "Se acabaron las tortillas del Markina",
+    content: "Estaban demasiado muy buenas y se las han comido todas",
+    date:"2024-06-17",
+    email: "guillermu@thebridgeschool.es",
+    category: "Sucesos",
+    old_title:"Se acabaron las mandarinas de TB"
+}
 
 
 // updateEntry(updatedEntry)
 //     .then(data => console.log(data))
 
-//deleteEntry('Estamos de Lunes de Back 3')
+// deleteEntry('Estamos de Lunes de Back 2')

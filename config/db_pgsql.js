@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 require('dotenv').config()
 
-// PARA USAR EN LOCAL CON DOCKER
+//DOCKER
 // const pool = new Pool({
 //     host: 'localhost',
 //     user: 'postgres',
@@ -11,7 +11,7 @@ require('dotenv').config()
 //     password: '123456'
 // });
 
-// PARA USAR CON RENDER
+//RENDER
 const pool = new Pool({
     host: 'dpg-cprhqvdumphs73c615n0-a.frankfurt-postgres.render.com',
     user: 'edu_hc2f_user',
@@ -25,7 +25,7 @@ const pool = new Pool({
 
 
 
-// PARA USAR CON DOTENV
+//DOTENV
 //   const pool = new Pool({ 
 //     user: process.env.PG_USER, 
 //     host: process.env.PG_HOST, 

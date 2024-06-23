@@ -1,12 +1,15 @@
 const express = require('express');
-// Rutas de productos
-const entriesController = require("../controllers/entries.controller");
-const router = express.Router();
 
-router.get('/', entriesController.getEntries);
-router.post('/', entriesController.createEntry);
-router.put('/', entriesController.updateEntry);
-router.delete('/', entriesController.deleteEntry);
+// Rutas
+const router = express.Router();
+const entriesController = require("../controllers/entries.controller");
+const checkApiKey = require('../middlewares/auth_api_key');
+const { validateCreateEntries, validateDeleteEntry, validateGetEntries, validateUpdateEntry } = require("../validators/entries.validators");
+
+router.get('/', checkApiKey, validateGetEntries, entriesController.getEntries);
+router.post('/', checkApiKey,validateCreateEntries, entriesController.createEntry);
+router.put('/', checkApiKey, validateUpdateEntry, entriesController.updateEntry);
+router.delete('/', checkApiKey, validateDeleteEntry, entriesController.deleteEntry);
 
 module.exports = router;
 

@@ -1,4 +1,4 @@
-const {Pool} = require('pg');
+//const {Pool} = require('pg');
 const pool = require('../config/db_pgsql');
 const queries = require('../queries/entries.queries') // Queries SQL
 
@@ -65,16 +65,19 @@ const deleteEntry = async (title) => {
     let client, result;
     try {
         client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query(queries.deleteEntry,[title]);
-        result = data.fields;
+        console.log(`Intentando eliminar la entrada con título: ${title}`);
+        const data = await client.query(queries.deleteEntry, [title]);
+        console.log(`Resultado de la eliminación: ${data.rowCount}`);
+        result = data.rowCount;
     } catch (err) {
-        console.log(err);
+        console.error(`Error al eliminar la entrada: ${err.message}`);
         throw err;
     } finally {
         client.release();
     }
     return result;
 }
+
 
 //UPDATE
 const updateEntry = async (entry) => {

@@ -4,10 +4,10 @@ const port = 3000;
 
 //importar middlewares
 // const error404 = require("./middlewares/error404.js");
-const morgan = require("./middlewares/morgan.js");
+//const morgan = require("./middlewares/morgan.js");
 
 // Logger
-app.use(morgan(':method :host :url :status :param[id] - :response-time ms :body'));
+//app.use(morgan(':method :host :url :status :param[id] - :response-time ms :body'));
 
 // Rutas
 const authorsRoutes = require("./routes/authors.routes")
@@ -15,9 +15,9 @@ const entriesRoutes = require("./routes/entries.routes")
 
 app.use(express.json()); // Habilito recepción de JSON en servidor
 
-// app.get("/", (req, res) => {
-//     res.send("Hello World! lets go for coffee!!");
-// });
+app.get("/", (req, res) => {
+    res.send("Hello World! lets go for coffee!!");
+});
 
 // Rutas
 //API

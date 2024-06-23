@@ -134,14 +134,14 @@ getAllEntries()
 // createEntry(newEntry)
 //     .then(data => console.log(data)) 
 
-const updatedEntry = {
-    title: "Se acabaron las tortillas del Markina",
-    content: "Estaban demasiado muy buenas y se las han comido todas",
-    date:"2024-06-17",
-    email: "guillermu@thebridgeschool.es",
-    category: "Sucesos",
-    old_title:"Se acabaron las mandarinas de TB"
-}
+// const updatedEntry = {
+//     title: "Se acabaron las tortillas del Markina",
+//     content: "Estaban demasiado muy buenas y se las han comido todas",
+//     date:"2024-06-17",
+//     email: "guillermu@thebridgeschool.es",
+//     category: "Sucesos",
+//     old_title:"Se acabaron las mandarinas de TB"
+// }
 
 
 // updateEntry(updatedEntry)

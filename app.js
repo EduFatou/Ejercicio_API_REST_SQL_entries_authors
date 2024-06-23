@@ -4,10 +4,10 @@ const port = 3000;
 
 //importar middlewares
 // const error404 = require("./middlewares/error404.js");
-//const morgan = require("./middlewares/morgan.js");
+const morgan = require("./middlewares/morgan.js");
 
 // Logger
-//app.use(morgan(':method :host :url :status :param[id] - :response-time ms :body'));
+app.use(morgan(':method :host :url :status :param[id] - :response-time ms :body'));
 
 // Rutas
 const authorsRoutes = require("./routes/authors.routes")

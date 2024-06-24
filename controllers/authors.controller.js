@@ -7,7 +7,13 @@ const { validationResult } = require("express-validator");
 const getAuthors = async (req, res) => {
     let authors;
     try {
-        if (req.query.email) {
+        console.log(req.query)
+        if (req.query.email || req.query.email == '') {
+            // Validate request
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
             authors = await author.getAuthorByEmail(req.query.email);
         }
         else {
@@ -65,7 +71,7 @@ const updateAuthor = async (req, res) => {
             const response = await author.updateAuthor(modifiedAuthor);
             res.status(201).json({
                 items_updated: response,
-                data: modifiedAuthor, 
+                data: modifiedAuthor,
             });
             console.log(`se ha modificado la author ${modifiedAuthor.email}`)
         } catch (error) {
@@ -86,9 +92,9 @@ const deleteAuthor = async (req, res) => {
     let authors;
     try {
         authors = await author.deleteAuthor(req.query.email);
-        res.status(200).json({"exito" : `Se ha borrado el autor: "${req.query.email}"`}); 
+        res.status(200).json({ "exito": `Se ha borrado el autor: "${req.query.email}"` });
     } catch {
-        res.status(500).json({ "error": "error en la BBDD" }); 
+        res.status(500).json({ "error": "error en la BBDD" });
     }
 }
 
@@ -101,7 +107,7 @@ module.exports = {
 
 //createAuthor
 // POST http://localhost:3000/api/authors
-// let newAuthor = { 
+// let newAuthor = {
 //     name: "cabesaguevo",
 //     surname: "lomismo",
 //     email: "hander@thebridgeschool.es",
